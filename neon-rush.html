@@ -105,6 +105,33 @@
       outline: none;
     }
 
+    .hub-link {
+      position: absolute;
+      top: max(12px, env(safe-area-inset-top));
+      left: max(14px, env(safe-area-inset-left));
+      z-index: 36;
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      padding: 0 12px;
+      border: 1px solid rgba(185, 239, 245, 0.13);
+      border-radius: 999px;
+      color: rgba(234, 249, 251, 0.68);
+      background: rgba(4, 10, 14, 0.58);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+      font-size: 10px;
+      font-weight: 650;
+      letter-spacing: 0.07em;
+      transition: opacity 160ms ease, transform 160ms ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .hub-link.is-hidden {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+    }
+
     .hud {
       position: absolute;
       top: 0;
@@ -969,6 +996,7 @@
 <body>
   <main class="game" id="gameApp">
     <canvas id="gameCanvas" role="img" aria-label="疾轨跑酷场景：角色在三条霓虹轨道上自动前进，通过左右换道躲避红色路障并收集光核。"></canvas>
+    <a class="hub-link" id="hubLink" href="index.html" aria-label="返回迷你街机游戏库">← 游戏库</a>
 
     <header class="hud is-hidden" id="hud" aria-label="游戏状态">
       <div class="hud-top">
@@ -1085,6 +1113,7 @@
       const app = document.getElementById("gameApp");
       const canvas = document.getElementById("gameCanvas");
       const ctx = canvas.getContext("2d", { alpha: true });
+      const hubLink = document.getElementById("hubLink");
 
       const hud = document.getElementById("hud");
       const scoreValue = document.getElementById("scoreValue");
@@ -1244,6 +1273,10 @@
         hud.classList.toggle("is-hidden", !visible);
         hud.inert = !visible;
         hud.setAttribute("aria-hidden", String(!visible));
+      }
+
+      function setHubLinkVisible(visible) {
+        hubLink.classList.toggle("is-hidden", !visible);
       }
 
       function updateSoundButton() {
@@ -1466,6 +1499,7 @@
         setScreen(overScreen, false);
         setScreen(pauseScreen, false);
         setHudVisible(true);
+        setHubLinkVisible(false);
         if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
         showControlCue(3000);
         tone(190, 510, 0.22, "sine", 0.018);
@@ -1476,6 +1510,7 @@
         state = STATE.MENU;
         resetRun();
         setHudVisible(false);
+        setHubLinkVisible(true);
         hideControlCue();
         setScreen(pauseScreen, false);
         setScreen(overScreen, false);
@@ -1489,6 +1524,7 @@
         if (state !== STATE.PLAYING) return;
         state = STATE.PAUSED;
         setHudVisible(false);
+        setHubLinkVisible(true);
         setScreen(pauseScreen, true);
         hideControlCue();
         setLiveStatus("游戏已暂停。");
@@ -1501,6 +1537,7 @@
         state = STATE.PLAYING;
         setScreen(pauseScreen, false);
         setHudVisible(true);
+        setHubLinkVisible(false);
         if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
         lastFrame = performance.now();
         setLiveStatus("继续游戏。");
@@ -1848,6 +1885,7 @@
         newBestBadge.hidden = !newRecord;
         menuBest.textContent = formatScore(best);
         setHudVisible(false);
+        setHubLinkVisible(true);
         setScreen(overScreen, true);
         setLiveStatus(`本轮结束，得分 ${roundedScore}。最高分 ${best}。`);
         window.setTimeout(() => retryButton.focus({ preventScroll: true }), 40);

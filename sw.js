@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_VERSION = "mini-arcade-v1.0.0";
+const CACHE_VERSION = "mini-arcade-v1.0.1";
 const CACHE_NAME = `mini-arcade-${CACHE_VERSION}`;
 const APP_SHELL = [
   "./",
