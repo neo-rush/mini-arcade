@@ -1,0 +1,65 @@
+{
+  "id": "./",
+  "name": "迷你街机 · 浮光与疾轨",
+  "short_name": "迷你街机",
+  "description": "可离线游玩的手机小游戏合集，包含重力翻转游戏《浮光》和三轨跑酷游戏《疾轨》。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "orientation": "any",
+  "background_color": "#04070c",
+  "theme_color": "#04070c",
+  "categories": ["games", "entertainment"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "浮光 · 重力翻转",
+      "short_name": "浮光",
+      "description": "直接进入《浮光》",
+      "url": "./float-light.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "疾轨 · 三轨跑酷",
+      "short_name": "疾轨",
+      "description": "直接进入《疾轨》",
+      "url": "./neon-rush.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
